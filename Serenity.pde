@@ -8,35 +8,43 @@
 #include "stdint.h"
 #include "Songs.h"
 
-
+//#define SONG1
 
 int ledPin = 11;
+int songsLen = 0;
+Song** Songs;
 
 void setup()  { 
-  Serial.begin(9600);
+  //Serial.begin(9600);
   delay(50);
   
-  Serial.println(songsLen);
-  for(int i=0; i < songsLen; i++){
-    Serial.println(Songs[i]->notecount);
-  }
-  Serial.println("");
+#ifdef SONG1
+  songsLen = song1Len;
+  Songs = Song1;
+  //Serial.println("Song 1");
+#else
+  songsLen = song2Len;
+  Songs = Song2;
+  //Serial.println("Song 2");
+#endif
+ 
+  //Serial.println(songsLen);
+  //Serial.println("");
 } 
 
 void loop()  { 
   static int i = 0;
-  
-  Serial.print("Song ");
-  Serial.println(i+'a', BYTE);
-  
-  delay(2000);
-  
   int songSize = Songs[i]->notecount;
   const uint8_t* songNotes = Songs[i]->notes;
   
-  // fade in from min to max in increments of 1 point:
+  //Serial.print("Song ");
+  //Serial.println(i+'a', BYTE);
+  //Serial.println(songSize);
+  
+  delay(2000);
+  
   for(int fadeValue = 0 ; fadeValue < songSize; fadeValue +=1) { 
-    analogWrite(ledPin, songNotes[fadeValue]);
+    analogWrite(ledPin, songNotes[fadeValue]);  
     delay(25);
   }
   i++;

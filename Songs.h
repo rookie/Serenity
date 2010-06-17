@@ -9,5 +9,7 @@ typedef struct song {
 } Song;
 
 
-extern Song* Songs[];
-extern int songsLen;
+extern Song* Song1[];
+extern int song1Len;
+extern Song* Song2[];
+extern int song2Len;
