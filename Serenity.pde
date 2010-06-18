@@ -11,7 +11,6 @@
 
 //#define SONG1
 
-int ledPin = 11;
 Firefly ffly1;
 Firefly ffly2;
 
@@ -20,8 +19,7 @@ Song** Songs;
 
 void setup()  { 
   //Serial.begin(9600);
-  delay(50);
-  
+  //delay(50); 
 #ifdef SONG1
   songsLen = song1Len;
   Songs = Song1;
@@ -43,6 +41,10 @@ void setup()  {
   ffly2.resetDelay = 1300/25;
   ffly2.songIndex = 2;
   ffly2.currentNote = 0;
+ 
+ 
+  pinMode(ffly1.pin, OUTPUT);
+  pinMode(ffly2.pin, OUTPUT);
  
 } 
 
@@ -75,7 +77,6 @@ void proc_fly(Firefly* fly){
     }else{
       fly->delay = 0; 
     }
-    
   }else{
     fly->delay--;
   }
