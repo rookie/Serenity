@@ -13,6 +13,7 @@
 
 int ledPin = 11;
 Firefly ffly1;
+Firefly ffly2;
 
 int songsLen = 0;
 Song** Songs;
@@ -32,15 +33,22 @@ void setup()  {
 #endif
 
   ffly1.pin   = 11;
-  ffly1.delay = 2000/25;
+  ffly1.delay = 0;
   ffly1.resetDelay = 2000/25;
   ffly1.songIndex = 0;
   ffly1.currentNote = 0;
+  
+  ffly2.pin   = 9;
+  ffly2.delay = 50;
+  ffly2.resetDelay = 1300/25;
+  ffly2.songIndex = 2;
+  ffly2.currentNote = 0;
  
 } 
 
 void loop()  { 
   proc_fly(&ffly1);
+  proc_fly(&ffly2);
   delay(25);
 }
 
