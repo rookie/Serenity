@@ -33,45 +33,47 @@ void setup()  {
 
   ffly1.pin   = 11;
   ffly1.delay = 2000/25;
+  ffly1.resetDelay = 2000/25;
+  ffly1.songIndex = 0;
   ffly1.currentSong = Songs[0]; 
   ffly1.currentNote = 0;
  
-  //Serial.println(songsLen);
-  //Serial.println("");
 } 
 
 void loop()  { 
-  static int i = 0;
-  int songSize;
-  const uint8_t* songNotes;
-
-  if(ffly1.delay == 0){
-    i++;
-    if(i == songsLen) i = 0;
-    
-    Serial.println(i+'a', BYTE);
-    ffly1.currentSong = Songs[i];
-    ffly1.currentNote = 0;
-    ffly1.delay = 2000/25;
-
-  }else if(ffly1.delay == 1){
-    songSize = ffly1.currentSong->notecount;
-    songNotes = ffly1.currentSong->notes;
-
-    if(ffly1.currentNote < songSize){
-      analogWrite(ffly1.pin, songNotes[ffly1.currentNote]);
-      Serial.println(songNotes[ffly1.currentNote], DEC);
-      ffly1.currentNote++;
-    }else{
-      ffly1.delay = 0; 
-    }
-    
-    
-  }else{
-    ffly1.delay--;
-  }
+  proc_fly(&ffly1);
   delay(25);
 }
 
+void proc_fly(Firefly* fly){
+  int songSize;
+  const uint8_t* songNotes;
+
+  if(fly->delay == 0){
+    fly->songIndex++;
+    if(fly->songIndex >= songsLen) fly->songIndex = 0;
+    
+    //Serial.println(fly->songIndex+'a', BYTE);
+    fly->currentSong = Songs[fly->songIndex];
+    fly->currentNote = 0;
+    fly->delay = fly->resetDelay;
+
+  }else if(fly->delay == 1){
+    songSize = fly->currentSong->notecount;
+    songNotes = fly->currentSong->notes;
+
+    if(fly->currentNote < songSize){
+      analogWrite(fly->pin, songNotes[fly->currentNote]);
+      //Serial.println(songNotes[fly->currentNote], DEC);
+      fly->currentNote++;
+    }else{
+      fly->delay = 0; 
+    }
+    
+  }else{
+    fly->delay--;
+  }
+  
+}
 
 
