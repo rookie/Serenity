@@ -18,7 +18,7 @@ int songsLen = 0;
 Song** Songs;
 
 void setup()  { 
-  Serial.begin(9600);
+  //Serial.begin(9600);
   delay(50);
   
 #ifdef SONG1
@@ -35,7 +35,6 @@ void setup()  {
   ffly1.delay = 2000/25;
   ffly1.resetDelay = 2000/25;
   ffly1.songIndex = 0;
-  ffly1.currentSong = Songs[0]; 
   ffly1.currentNote = 0;
  
 } 
@@ -54,13 +53,12 @@ void proc_fly(Firefly* fly){
     if(fly->songIndex >= songsLen) fly->songIndex = 0;
     
     //Serial.println(fly->songIndex+'a', BYTE);
-    fly->currentSong = Songs[fly->songIndex];
     fly->currentNote = 0;
     fly->delay = fly->resetDelay;
 
   }else if(fly->delay == 1){
-    songSize = fly->currentSong->notecount;
-    songNotes = fly->currentSong->notes;
+    songSize = Songs[fly->songIndex]->notecount;
+    songNotes = Songs[fly->songIndex]->notes;
 
     if(fly->currentNote < songSize){
       analogWrite(fly->pin, songNotes[fly->currentNote]);
