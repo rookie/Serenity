@@ -7,15 +7,18 @@
  */
 #include "stdint.h"
 #include "Songs.h"
+#include "firefly.h"
 
 //#define SONG1
 
 int ledPin = 11;
+Firefly ffly1;
+
 int songsLen = 0;
 Song** Songs;
 
 void setup()  { 
-  //Serial.begin(9600);
+  Serial.begin(9600);
   delay(50);
   
 #ifdef SONG1
@@ -27,6 +30,11 @@ void setup()  {
   Songs = Song2;
   //Serial.println("Song 2");
 #endif
+
+  ffly1.pin   = 11;
+  ffly1.delay = 2000/25;
+  ffly1.currentSong = Songs[0]; 
+  ffly1.currentNote = 0;
  
   //Serial.println(songsLen);
   //Serial.println("");
@@ -34,21 +42,36 @@ void setup()  {
 
 void loop()  { 
   static int i = 0;
-  int songSize = Songs[i]->notecount;
-  const uint8_t* songNotes = Songs[i]->notes;
-  
-  //Serial.print("Song ");
-  //Serial.println(i+'a', BYTE);
-  //Serial.println(songSize);
-  
-  delay(2000);
-  
-  for(int fadeValue = 0 ; fadeValue < songSize; fadeValue +=1) { 
-    analogWrite(ledPin, songNotes[fadeValue]);  
-    delay(25);
+  int songSize;
+  const uint8_t* songNotes;
+
+  if(ffly1.delay == 0){
+    i++;
+    if(i == songsLen) i = 0;
+    
+    Serial.println(i+'a', BYTE);
+    ffly1.currentSong = Songs[i];
+    ffly1.currentNote = 0;
+    ffly1.delay = 2000/25;
+
+  }else if(ffly1.delay == 1){
+    songSize = ffly1.currentSong->notecount;
+    songNotes = ffly1.currentSong->notes;
+
+    if(ffly1.currentNote < songSize){
+      analogWrite(ffly1.pin, songNotes[ffly1.currentNote]);
+      Serial.println(songNotes[ffly1.currentNote], DEC);
+      ffly1.currentNote++;
+    }else{
+      ffly1.delay = 0; 
+    }
+    
+    
+  }else{
+    ffly1.delay--;
   }
-  i++;
-  if(i == songsLen) i = 0;
+  delay(25);
 }
+
 
 
