@@ -5,7 +5,8 @@
   inspired by: http://www.instructables.com/id/Jar-of-Fireflies/
  
  */
-#include "stdint.h"
+#include <avr/pgmspace.h>
+#include <stdint.h>
 #include "Songs.h"
 #include "firefly.h"
 
@@ -32,13 +33,13 @@ void setup()  {
 
   ffly1.pin   = 11;
   ffly1.delay = 0;
-  ffly1.resetDelay = 2000/25;
+  ffly1.resetDelay = 10000/25;
   ffly1.songIndex = 0;
   ffly1.currentNote = 0;
   
   ffly2.pin   = 9;
   ffly2.delay = 50;
-  ffly2.resetDelay = 1300/25;
+  ffly2.resetDelay = 8000/25;
   ffly2.songIndex = 2;
   ffly2.currentNote = 0;
  
@@ -56,7 +57,7 @@ void loop()  {
 
 void proc_fly(Firefly* fly){
   int songSize;
-  const uint8_t* songNotes;
+  PROGMEM prog_uchar* songNotes;
 
   if(fly->delay == 0){
     fly->songIndex++;
@@ -71,8 +72,8 @@ void proc_fly(Firefly* fly){
     songNotes = Songs[fly->songIndex]->notes;
 
     if(fly->currentNote < songSize){
-      analogWrite(fly->pin, songNotes[fly->currentNote]);
-      //Serial.println(songNotes[fly->currentNote], DEC);
+      analogWrite(fly->pin, pgm_read_byte_near(&songNotes[fly->currentNote]));
+      //Serial.println(pgm_read_byte_near(&songNotes[fly->currentNote]), DEC);
       fly->currentNote++;
     }else{
       fly->delay = 0; 

@@ -4,8 +4,8 @@
 */
 
 typedef struct song {
-    uint16_t        notecount;
-    const uint8_t  *notes; 
+    uint16_t         notecount;
+    PROGMEM prog_uchar  *notes; 
 } Song;
 
 

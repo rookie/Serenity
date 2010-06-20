@@ -11,8 +11,8 @@
 /* Songlength : 1.17x
  * Maxbright : 192
 */
-const uint8_t song1anotes[] = {
-//PROGMEM prog_uchar song1anotes[] = {
+//const uint8_t song1anotes[] = {
+PROGMEM prog_uchar song1anotes[] = {
                        2,  14,  44,  95, 141, 175, 192, 186, 149,  94, 
                       60,  35,  38,  50,  76,  83,  73,  58,  43,  30, //20
                       20,  14,  16,  25,  30,  27,  20,  11,   4,  10, 
@@ -28,7 +28,7 @@ Song song1a = { sizeof(song1anotes), song1anotes };
 /* Songlength : 1.35x
  * Maxbright : 192
 */
-const uint8_t song1bnotes[] = {
+PROGMEM prog_uchar song1bnotes[] = {
                        5,  17,  45,  89, 131, 163, 185, 192, 180, 143,
                       95,  64,  41,  31,  44,  55,  79,  82,  73,  61, //20
                       48,  36,  26,  18,  14,  15,  23,  30,  29,  24,
@@ -45,7 +45,7 @@ Song song1b = { sizeof(song1bnotes), song1bnotes };
 /* Songlength : 1.12
  * Maxbright : 192
 */
-const uint8_t song1cnotes[] = {
+PROGMEM prog_uchar song1cnotes[] = {
                        2,  16,  52, 106, 151, 182, 192, 174, 122,  74,
                       44,  31,  46,  64,  83,  75,  60,  45,  31,  20, //20
                       14,  16,  25,  30,  26,  18,   8,   5,  13,  18,
@@ -61,7 +61,7 @@ Song song1c = { sizeof(song1cnotes), song1cnotes };
  * Maxbright : 202
 */
 // Deemed too fast by Kayobi
-const uint8_t song1dnotes[] = {
+PROGMEM prog_uchar song1dnotes[] = {
                        8,  28,  78, 133, 176, 195, 171, 105,  62,  37,
                       41,  54,  81,  74,  59,  43,  29,  19,  16,  24, //20
                       32,  29,  20,   8,   8,  18,  22,  18,  11,   5,
@@ -74,7 +74,7 @@ Song song1d = { sizeof(song1dnotes), song1dnotes };
 /* Songlength : 1.50x
  * Maxbright : 192
 */
-const uint8_t song1enotes[] = {
+PROGMEM prog_uchar song1enotes[] = {
                        5,  15,  32,  64,  99, 132, 160, 179, 183, 167,
                      131,  89,  62,  44,  32,  36,  44,  54,  74,  74, //20
                       67,  57,  47,  38,  29,  21,  16,  14,  17,  24,
@@ -91,7 +91,7 @@ Song song1e = { sizeof(song1enotes), song1enotes };
  * Maxbright : 192
  * flatduration : 787
 */
-const uint8_t song2anotes[] = {
+PROGMEM prog_uchar song2anotes[] = {
                        2,  29,  81, 123, 130, 104,  63,  24,   2,   1,
                        1,   1,   1,   1,   1,   4,  15,  26,  36,  46, //20
                       55,  66,  79,  91, 102, 109, 115, 121, 131, 142,
@@ -110,7 +110,7 @@ Song song2a = { sizeof(song2anotes), song2anotes };
  * Maxbright : 192
  * flatduration : 787
 */
-const uint8_t song2bnotes[] = {
+PROGMEM prog_uchar song2bnotes[] = {
                        1,  31,  89, 126, 119,  85,  42,   6,   1,   1,
                        1,   1,   1,   1,   8,  22,  37,  51,  64,  72, //20
                       80,  92, 108, 122, 127, 122, 117, 124, 143, 163,
@@ -128,7 +128,7 @@ Song song2b = { sizeof(song2bnotes), song2bnotes };
  * Maxbright : 192
  * flatduration : 787
 */
-const uint8_t song2cnotes[] = {
+PROGMEM prog_uchar song2cnotes[] = {
                        2,  25,  70, 117, 146, 144, 111,  61,  18,   1,
                        1,   1,   1,   1,   1,   1,   1,   8,  18,  28, //20
                       39,  50,  60,  69,  78,  85,  92,  99, 105, 111,
@@ -149,7 +149,7 @@ Song song2c = { sizeof(song2cnotes), song2cnotes };
  * Maxbright : 192
  * flatduration : 787 * 0.65
 */
-const uint8_t song2dnotes[] = {
+PROGMEM prog_uchar song2dnotes[] = {
                        1,  27,  72, 109, 121, 104,  61,  17,   1,   1,
                        1,   1,   1,   1,   1,  11,  21,  34,  48,  60, //20
                       70,  77,  86,  99, 115, 128, 135, 135, 134, 136,
@@ -166,7 +166,7 @@ Song song2d = { sizeof(song2dnotes), song2dnotes };
  * Maxbright : 192
  * flatduration : 787 * 1.25
 */
-const uint8_t song2enotes[] = {
+PROGMEM prog_uchar song2enotes[] = {
                        1,  26,  73, 116, 131, 115,  80,  39,   8,   1,
                        1,   1,   1,   1,   1,   1,   6,  15,  26,  36, //20
                       47,  58,  70,  82,  91,  98, 102, 106, 111, 119,
@@ -187,7 +187,7 @@ Song song2e = { sizeof(song2enotes), song2enotes };
  * Maxbright : 192
  * flatduration : 787 * 0.75
 */
-const uint8_t song2fnotes[] = {
+PROGMEM prog_uchar song2fnotes[] = {
                        2,  36,  94, 130, 121,  79,  27,   1,   1,   1,
                        1,   1,   1,   5,  16,  30,  45,  59,  71,  82, //20
                       94, 107, 119, 130, 137, 142, 147, 151, 154, 153,
@@ -204,7 +204,7 @@ Song song2f = { sizeof(song2fnotes), song2fnotes };
  * Maxbright : 192
  * flatduration : 787 * 0.30
 */
-const uint8_t song2gnotes[] = {
+PROGMEM prog_uchar song2gnotes[] = {
                        2,  42,  99, 121,  96,  42,   3,   1,   1,   1,
                        1,   1,  12,  25,  41,  60,  77,  86,  91, 100, //20
                      118, 136, 144, 143, 141, 146, 153, 155, 153, 152,
