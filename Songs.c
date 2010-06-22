@@ -215,7 +215,7 @@ PROGMEM prog_uchar song2gnotes[] = {
 Song song2g = { sizeof(song2gnotes), song2gnotes };
 
 
-Song* Song1[] = {&song1a, &song1b, &song1c, &song1d, &song1e};
+Song* Song1[] = {&song1a, &song1b, &song1c, /*&song1d,*/ &song1e};
 int song1Len  = sizeof(Song1)/sizeof(&song1a);
 
 Song* Song2[] = {&song2a, &song2b, &song2c, &song2d, &song2e, &song2f, &song2g};
