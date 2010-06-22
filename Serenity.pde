@@ -34,23 +34,10 @@ void setup()  {
 
   Serial.print(songsLen);
   Serial.println(" notes to choose from");
-
-
-  ffly1.pin   = 11;
-  ffly1.delay = 0;
-  //ffly1.resetDelay = 10000/25;
-  ffly1.songIndex = 0;
-  ffly1.currentNote = 0;
   
-  ffly2.pin   = 9;
-  ffly2.delay = 0;
-  //ffly2.resetDelay = 8000/25;
-  ffly2.songIndex = 2;
-  ffly2.currentNote = 0;
+  fly_init(&ffly1, 11); 
+  fly_init(&ffly2, 9); 
  
- 
-  pinMode(ffly1.pin, OUTPUT);
-  pinMode(ffly2.pin, OUTPUT);
  
 } 
 
@@ -82,11 +69,7 @@ void proc_fly(Firefly* fly){
   PROGMEM prog_uchar* songNotes;
 
   if(fly->delay == 0){
-    fly->songIndex = randomSong();
-    
-    //Serial.println(fly->songIndex+'a', BYTE);
-    fly->currentNote = 0;
-    fly->delay = randomDelay();
+    fly_reset(fly);
 
   }else if(fly->delay == 1){
     songSize = Songs[fly->songIndex]->notecount;
@@ -105,4 +88,18 @@ void proc_fly(Firefly* fly){
   
 }
 
+void fly_init(Firefly* fly, int pin){
+  fly->pin = pin;
+  pinMode(fly->pin, OUTPUT);
+  fly_reset(fly);
+}
+
+void fly_reset(Firefly* fly){
+  
+    fly->songIndex = randomSong();
+    //Serial.println(fly->songIndex+'a', BYTE);
+    fly->currentNote = 0;
+    fly->delay = randomDelay();
+  
+}
 
