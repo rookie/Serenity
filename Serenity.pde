@@ -95,7 +95,6 @@ void fly_flash(Firefly* fly){
 
 void fly_init(Firefly* fly, int pin){
   fly->pin = pin;
-  pinMode(fly->pin, OUTPUT);
   fly_reset(fly);
 }
 
