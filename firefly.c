@@ -2,13 +2,36 @@
 #include "WProgram.h"
 #include <avr/pgmspace.h>
 #include "pins_arduino.h" /*for isValidPWM*/
-
+#include "stdlib.h"
 #include "Songs.h"
 #include "firefly.h"
 
+int firefly_srand(unsigned int seed){
+  srandom(seed);
+}
+
+long random_max(long howbig)
+{
+  if (howbig == 0) {
+    return 0;
+  }
+  return random() % howbig;
+}
+long random_min_max(long howsmall, long howbig)
+{
+  if (howsmall >= howbig) {
+    return howsmall;
+  }
+  long diff = howbig - howsmall;
+  return random_max(diff) + howsmall;
+}
+
+
+
 int randomSong(){
   int song;
-  song = 0;//random(songsLen); 
+  song = random_max(songsLen);//random(songsLen); 
+
   //Serial.print("Song Notes: ");
   //Serial.println(song);
   return song;
@@ -16,7 +39,8 @@ int randomSong(){
 
 int randomDelay(){
   int songDelay;
-  songDelay = 8000/25;//random(8000/25, 12000/25); 
+  //songDelay = random(8000/25, 12000/25); 
+  songDelay = random_min_max(8000/25, 12000/25); 
   //Serial.print("Song Delay: ");
   //Serial.println(songDelay*25);
   return songDelay;
