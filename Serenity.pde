@@ -18,7 +18,7 @@ Firefly ffly2;
 int songsLen = 0;
 Song** Songs;
 
-void setup()  {
+void setup(){
   randomSeed(analogRead(0));
   Serial.begin(9600);
   delay(50); 
@@ -65,25 +65,30 @@ int randomDelay(){
 }
 
 void proc_fly(Firefly* fly){
-  int songSize;
-  PROGMEM prog_uchar* songNotes;
 
   if(fly->delay == 0){
     fly_reset(fly);
-
   }else if(fly->delay == 1){
-    songSize = Songs[fly->songIndex]->notecount;
-    songNotes = Songs[fly->songIndex]->notes;
-
-    if(fly->currentNote < songSize){
-      analogWrite(fly->pin, pgm_read_byte_near(&songNotes[fly->currentNote]));
-      //Serial.println(pgm_read_byte_near(&songNotes[fly->currentNote]), DEC);
-      fly->currentNote++;
-    }else{
-      fly->delay = 0; 
-    }
+    fly_flash(fly);
   }else{
     fly->delay--;
+  }
+  
+}
+
+void fly_flash(Firefly* fly){
+  int songSize;
+  PROGMEM prog_uchar* songNotes;
+  
+  songSize = Songs[fly->songIndex]->notecount;
+  songNotes = Songs[fly->songIndex]->notes;
+
+  if(fly->currentNote < songSize){
+    analogWrite(fly->pin, pgm_read_byte_near(&songNotes[fly->currentNote]));
+    //Serial.println(pgm_read_byte_near(&songNotes[fly->currentNote]), DEC);
+    fly->currentNote++;
+  }else{
+    fly->delay = 0; 
   }
   
 }
