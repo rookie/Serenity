@@ -4,7 +4,7 @@
 */
 
 #ifndef _SONGS_H_
-#define _SONGS_H_
+#define _SONGS_H
 
 typedef struct song {
     uint16_t         notecount;
