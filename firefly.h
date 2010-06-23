@@ -1,5 +1,8 @@
 
 
+#ifndef _FIREFLY_H_
+#define _FIREFLY_H_
+
 typedef struct firefly {
   int          pin;
   int          delay;
@@ -8,3 +11,5 @@ typedef struct firefly {
   int          songIndex;
   int          currentNote;
 } Firefly;
+
+#endif
