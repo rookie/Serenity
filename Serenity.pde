@@ -5,9 +5,6 @@
   inspired by: http://www.instructables.com/id/Jar-of-Fireflies/
  
  */
-#include <stdint.h>
-#include <avr/pgmspace.h>
-#include "Songs.h"
 #include "firefly.h"
 
 //#define SONG1
@@ -15,30 +12,23 @@
 Firefly ffly1;
 Firefly ffly2;
 
-int songsLen = 0;
-Song** Songs;
+//int songsLen = 0;
+//Song** Songs;
 
 void setup(){
-  randomSeed(analogRead(0));
-  Serial.begin(9600);
-  delay(50); 
-#ifdef SONG1
-  songsLen = song1Len;
-  Songs = Song1;
-  Serial.println("Song 1");
-#else
-  songsLen = song2Len;
-  Songs = Song2;
-  Serial.println("Song 2");
-#endif
+  //Serial.begin(9600);
+  //delay(50); 
 
-  Serial.print(songsLen);
-  Serial.println(" notes to choose from");
+  //Serial.print(songsLen);
+  //Serial.println(" notes to choose from");
   
+  randomSeed(analogRead(0));
+  //2002
+  //firefly_song1(); //3264
+  firefly_song2(); //3282
+  //3342
   fly_init(&ffly1, 11); 
-  fly_init(&ffly2, 9); 
- 
- 
+  fly_init(&ffly2, 9);
 } 
 
 void loop()  { 

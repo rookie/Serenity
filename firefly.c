@@ -6,6 +6,22 @@
 #include "Songs.h"
 #include "firefly.h"
 
+
+static int songsLen = 0;
+static Song** Songs;
+
+
+int firefly_song1(){
+  songsLen = song1Len;
+  Songs = Song1;
+  //Serial.println("Song 1");
+}
+int firefly_song2(){
+  songsLen = song2Len;
+  Songs = Song2;
+  //Serial.println("Song 2");
+}
+
 int firefly_srand(unsigned int seed){
   srandom(seed);
 }
