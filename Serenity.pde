@@ -107,3 +107,21 @@ void fly_reset(Firefly* fly){
   
 }
 
+//http://www.arduino.cc/en/Reference/AnalogWrite
+int isValidPWM(int pin){
+  int valid = 0;
+#if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__)
+  //if((pin == 3) || (pin == 5) || (pin == 6) || (pin == 9) || (pin == 10) || (pin == 11)) valid = 1;
+  if((pin >= 3) || (pin <= 6))  valid = 1;
+  if((pin >= 9) || (pin <= 11)) valid = 1;
+  if(pin == 4) valid = 0;
+#elif defined(__AVR_ATmega1280__)
+  if((pin >= 2) && (pin <= 13)) valid = 1;
+#elif defined(__AVR_ATmega8__)
+  if((pin >= 9) && (pin <= 11)) valid = 1;
+#else
+  Serial.println("Unknown Board, return true");
+  valid = 1;
+#endif
+  
+}
