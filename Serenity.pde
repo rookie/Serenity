@@ -7,33 +7,35 @@
  */
 #include "firefly.h"
 
-//#define SONG1
-
 Firefly ffly1;
 Firefly ffly2;
-
-//int songsLen = 0;
-//Song** Songs;
+Firefly ffly3;
+Firefly ffly4;
+Firefly ffly5;
+Firefly ffly6;
 
 void setup(){
   //Serial.begin(9600);
-  //delay(50); 
 
-  //Serial.print(songsLen);
-  //Serial.println(" notes to choose from");
-  
   randomSeed(analogRead(0));
-  //2002
-  //firefly_song1(); //3264
-  firefly_song2(); //3282
-  //3342
-  fly_init(&ffly1, 11); 
+  //firefly_song1();
+  firefly_song2();
+  
+  fly_init(&ffly1, 3); 
+  fly_init(&ffly2, 5);
+  fly_init(&ffly1, 6); 
   fly_init(&ffly2, 9);
+  fly_init(&ffly1, 10); 
+  fly_init(&ffly2, 11);
 } 
 
 void loop()  { 
   proc_fly(&ffly1);
   proc_fly(&ffly2);
+  proc_fly(&ffly3);
+  proc_fly(&ffly4);
+  proc_fly(&ffly5);
+  proc_fly(&ffly6);
   delay(25);
 }
 
