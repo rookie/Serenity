@@ -1,16 +1,17 @@
 
-#include "WProgram.h"
+#include <stdlib.h>
 #include <avr/pgmspace.h>
+#include "WProgram.h"
 #include "pins_arduino.h" /*for isValidPWM*/
-#include "stdlib.h"
 #include "Songs.h"
 #include "firefly.h"
 
-
+/*
+  option to use song set 1 or 2
+    separate into two functions for compiler, feel free to switch between them.
+*/
 static int songsLen = 0;
 static Song** Songs;
-
-
 int firefly_song1(){
   songsLen = song1Len;
   Songs = Song1;
@@ -77,6 +78,11 @@ void proc_fly(Firefly* fly){
 void fly_flash(Firefly* fly){
   int songSize;
   PROGMEM prog_uchar* songNotes;
+  
+  /*in case firefly_song2 or 1 is called*/
+  if(fly->songIndex >= songsLen){
+    fly_reset(fly);
+  }
   
   songSize = Songs[fly->songIndex]->notecount;
   songNotes = Songs[fly->songIndex]->notes;
