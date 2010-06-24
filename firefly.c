@@ -12,59 +12,35 @@
 */
 static int songsLen = 0;
 static Song** Songs;
-int firefly_song1(){
+static int randomSong();
+static int randomDelay();
+static long random_max(long howbig);
+static long random_min_max(long howsmall, long howbig);
+
+/*setup()*/
+int firefly_srand(unsigned int seed){
+  srandom(seed);
+}
+/*setup() choose one of them*/
+void firefly_song1(){
   songsLen = song1Len;
   Songs = Song1;
   //Serial.println("Song 1");
 }
-int firefly_song2(){
+void firefly_song2(){
   songsLen = song2Len;
   Songs = Song2;
   //Serial.println("Song 2");
 }
 
-int firefly_srand(unsigned int seed){
-  srandom(seed);
+/*setup()*/
+void fly_init(Firefly* fly, int pin){
+  fly->pin = pin;
+  fly_reset(fly);
 }
 
-long random_max(long howbig)
-{
-  if (howbig == 0) {
-    return 0;
-  }
-  return random() % howbig;
-}
-long random_min_max(long howsmall, long howbig)
-{
-  if (howsmall >= howbig) {
-    return howsmall;
-  }
-  long diff = howbig - howsmall;
-  return random_max(diff) + howsmall;
-}
-
-
-
-int randomSong(){
-  int song;
-  song = random_max(songsLen);//random(songsLen); 
-
-  //Serial.print("Song Notes: ");
-  //Serial.println(song);
-  return song;
-}
-
-int randomDelay(){
-  int songDelay;
-  //songDelay = random(8000/25, 12000/25); 
-  songDelay = random_min_max(8000/25, 12000/25); 
-  //Serial.print("Song Delay: ");
-  //Serial.println(songDelay*25);
-  return songDelay;
-}
-
+/*loop()*/
 void proc_fly(Firefly* fly){
-
   if(fly->delay == 0){
     fly_reset(fly);
   }else if(fly->delay == 1){
@@ -72,7 +48,6 @@ void proc_fly(Firefly* fly){
   }else{
     fly->delay--;
   }
-  
 }
 
 void fly_flash(Firefly* fly){
@@ -94,21 +69,45 @@ void fly_flash(Firefly* fly){
   }else{
     fly->delay = 0; 
   }
-  
-}
-
-void fly_init(Firefly* fly, int pin){
-  fly->pin = pin;
-  fly_reset(fly);
 }
 
 void fly_reset(Firefly* fly){
-  
     fly->songIndex = randomSong();
     //Serial.println(fly->songIndex+'a', BYTE);
     fly->currentNote = 0;
     fly->delay = randomDelay();
+}
+
+
+
+static int randomSong(){
+  int song = 0;
+  song = random_max(songsLen);
+  //Serial.print("Song Notes: ");
+  //Serial.println(song);
+  return song;
+}
+
+static int randomDelay(){
+  int songDelay = 8000/25;
+  songDelay = random_min_max(8000/25, 12000/25); 
+  //Serial.print("Song Delay: ");
+  //Serial.println(songDelay*25);
+  return songDelay;
+}
+
+static long random_max(long howbig)
+{
+  if (howbig == 0) return 0;
+
+  return random() % howbig;
+}
+static long random_min_max(long howsmall, long howbig)
+{
+  if (howsmall >= howbig) return howsmall;
   
+  long diff = howbig - howsmall;
+  return random_max(diff) + howsmall;
 }
 
 

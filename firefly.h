@@ -6,10 +6,8 @@
 #ifdef __cplusplus
  extern "C" {
 #endif 
- 
-//extern int songsLen;
-//extern Song** Songs;
 
+/*1. create one of these for each firefly, global scope*/
 typedef struct firefly {
   int          pin;
   int          delay;
@@ -17,20 +15,30 @@ typedef struct firefly {
   int          currentNote;
 } Firefly;
 
-int firefly_song1();
-int firefly_song2();
+/*call this or randomSeed(analogRead(0)); in setup() for better rancom numbers.
+  See WMath.cpp
+  ex: firefly_srand(analogRead(0));   */
+int firefly_srand(unsigned int seed);
 
-void proc_fly(Firefly* fly);
-void fly_flash(Firefly* fly);
+/*call one of these in the setup() function*/
+void firefly_song1();
+void firefly_song2();
+
+/*initialize each firefly in the setup() function so we know what pin to use*/
 void fly_init(Firefly* fly, int pin);
+
+/*runing in loop() set delay to 25 ms
+  ex:
+  proc_fly(&ffly1);
+  proc_fly(&ffly2);
+  delay(25);
+*/
+void proc_fly(Firefly* fly);
+
+/*internally used functions but feel free, take a look at proc_fly(...)*/
+void fly_flash(Firefly* fly);
 void fly_reset(Firefly* fly);
 
-/*
- calling randomSeed(analogRead(0)); in arduino should do the same as
-  firefly_srand(analogRead(0));
- See WMath.cpp
-*/
-int firefly_srand(unsigned int seed); //to seed random numbers
 
 #ifdef __cplusplus
 }
