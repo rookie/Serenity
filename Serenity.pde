@@ -23,10 +23,10 @@ void setup(){
   
   fly_init(&ffly1, 3); 
   fly_init(&ffly2, 5);
-  fly_init(&ffly1, 6); 
-  fly_init(&ffly2, 9);
-  fly_init(&ffly1, 10); 
-  fly_init(&ffly2, 11);
+  fly_init(&ffly3, 6); 
+  fly_init(&ffly4, 9);
+  fly_init(&ffly5, 10); 
+  fly_init(&ffly6, 11);
 } 
 
 void loop()  { 
