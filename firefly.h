@@ -15,6 +15,17 @@ typedef struct firefly {
   int          currentNote;
 } Firefly;
 
+#if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) || defined(__AVR_ATmega1280__) || defined(__AVR_ATmega8__)
+
+void fireflies_loop();
+void fireflies_pin_on(int pin);
+void fireflies_pin_off(int pin);
+
+#endif
+
+
+
+
 /*call this or randomSeed(analogRead(0)); in setup() for better rancom numbers.
   See WMath.cpp
   ex: firefly_srand(analogRead(0));   */

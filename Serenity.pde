@@ -7,13 +7,6 @@
  */
 #include "firefly.h"
 
-Firefly ffly1;
-Firefly ffly2;
-Firefly ffly3;
-Firefly ffly4;
-Firefly ffly5;
-Firefly ffly6;
-
 void setup(){
   //Serial.begin(9600);
 
@@ -21,21 +14,17 @@ void setup(){
   //firefly_song1();
   firefly_song2();
   
-  fly_init(&ffly1, 3); 
-  fly_init(&ffly2, 5);
-  fly_init(&ffly3, 6); 
-  fly_init(&ffly4, 9);
-  fly_init(&ffly5, 10); 
-  fly_init(&ffly6, 11);
+  
+  fireflies_pin_on(  3 ); 
+  fireflies_pin_on(  5 );
+  fireflies_pin_on(  6 ); 
+  fireflies_pin_on(  9 );
+  fireflies_pin_on( 10 ); 
+  fireflies_pin_on( 11 );
 } 
 
-void loop()  { 
-  proc_fly(&ffly1);
-  proc_fly(&ffly2);
-  proc_fly(&ffly3);
-  proc_fly(&ffly4);
-  proc_fly(&ffly5);
-  proc_fly(&ffly6);
+void loop()  {
+  fireflies_loop();
   delay(25);
 }
 
