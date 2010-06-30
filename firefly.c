@@ -155,7 +155,7 @@ int isValidPWM(int pin){
 
 void fireflies_loop(){
   int i = 0;
-  for(i = 0; i<(MAX_PWM_PIN-MIN_PWM_PIN); i++){
+  for(i = 0; i<=(MAX_PWM_PIN-MIN_PWM_PIN); i++){
     if(fflys[i] != 0){
       if(fflys[i]->pin != 0){
         proc_fly(fflys[i]);
@@ -171,7 +171,7 @@ void fireflies_pin_on(int pin){
   
   index = pin-MIN_PWM_PIN;
   if(fflys[index] != 0){
-    fly_init(&fflys[index], pin); 
+    fly_init(fflys[index], pin); 
   }
 }
 void fireflies_pin_off(int pin){
